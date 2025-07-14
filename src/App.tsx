@@ -2,10 +2,12 @@ import { Grid } from '@mui/material';
 import HeaderUI from './components/HeaderUI';
 import AlertUI from './components/AlertUI';
 import SelectorUI from './components/SelectorUI';
+import Weather from './features/Weather/Weather';
 
 function App() {
   return (
     <>
+      <Weather></Weather>
       <Grid container spacing={5} display="flex" justifyContent="center" alignItems="center">
 
         {/* Encabezado */}
