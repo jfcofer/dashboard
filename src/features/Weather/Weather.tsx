@@ -1,5 +1,5 @@
 import type { OpenMeteoResponse } from "../../services/openMeteo/openMeteo.types"
-import { useWeather } from "./Weather.hooks"
+import { useWeather } from "./hooks/useWeather"
 
 function Weather() {
   const { data, error, isLoading } = useWeather(37.7749, -122.4194)
