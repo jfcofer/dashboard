@@ -26,15 +26,22 @@ export function WeatherProvider({ children, initialLocation }: {
   const [latitude, setLatitude] = useState<number | undefined>(initialLocation?.lat);
   const [longitude, setLongitude] = useState<number | undefined>(initialLocation?.lon);
 
-  const { data, error, isLoading } = useWeather(latitude, longitude, {
-    enabled: latitude != null && longitude != null,
-  });
-
+  const { data, error, isLoading } = useWeather(
+    latitude,
+    longitude,
+  );
 
   const setLocation = (lat: number, lon: number) => {
     setLatitude(lat);
     setLongitude(lon);
   };
+
+  const hasLocation = latitude != null && longitude != null;
+
+  const clearLocation = () => {
+    setLatitude(undefined);
+    setLongitude(undefined);
+  }
 
   // useMemo ensures the context value object is stable
   const value = useMemo(() => ({
@@ -44,6 +51,8 @@ export function WeatherProvider({ children, initialLocation }: {
     latitude,
     longitude,
     setLocation,
+    hasLocation,
+    clearLocation,
   }), [data, isLoading, error, latitude, longitude]);
 
   return (
