@@ -2,6 +2,17 @@ import type { OpenMeteoResponse } from "../../../../../services/openMeteo/openMe
 import type { Alert } from "../../../types";
 
 function generateAlerts(data: OpenMeteoResponse): Alert[] {
+  if (!data) {
+    return [
+      {
+        id: "a1",
+        severity: "High",
+        event: "Plaga de langostas",
+        description:
+          "Se ha detectado una invasión de langostas en la zona norte del cultivo de maíz. Se recomienda aplicar control biológico inmediato.",
+      },
+    ];
+  }
   return [
     {
       id: "a1",
