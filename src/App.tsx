@@ -5,9 +5,10 @@ function App() {
     <WeatherProvider>
       <DashboardHeader></DashboardHeader>
       <main>
-        <PrecipitationModule />
+      
         <AlertsModule />
       </main>
+      <PrecipitationModule />
     </WeatherProvider>
   );
 }
