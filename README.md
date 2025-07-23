@@ -1,69 +1,89 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🌾 Dashboard Agroclimático
 
-Currently, two official plugins are available:
+Aplicación web para agricultores, cooperativas y aseguradoras que **optimiza decisiones de siembra, riego, fumigación y cosecha** mediante datos meteorológicos de alta frecuencia y reglas agronómicas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Valor que aporta
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Reduce pérdidas** por eventos extremos (heladas, sequías, granizo).
+- **Aumenta rendimiento** al sugerir las ventanas óptimas de riego y fumigación.
+- **Integra sensores IoT** o estaciones locales para micro‑climas.
+- **Facilita seguros agrarios** con datos trazables y alertas objetivas.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 🔑 Indicadores clave
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Categoría                           | Métricas principales                                                                                |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------- |
+| **Precipitación & pronóstico**      | Precipitation Sum (daily), Rain, Showers, Snowfall, Precipitation Probability                       |
+| **Alertas de riesgo**               | Heladas, Sequías, Granizo, Vientos fuertes (basado en Temperature, Soil Moisture, Wind Gusts, etc.) |
+| **Temperatura y viento semanal promedio** | Soil Temperature (0, 6, 18 cm), Relative Humidity (2 m), Soil Moisture (0–27 cm)                    |
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📊 Variables disponibles (Open‑Meteo)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+<details>
+<summary><strong>Hourly</strong></summary>
+
+- Temperature (2 m)
+- Relative Humidity (2 m)
+- Dew Point (2 m)
+- Apparent Temperature
+- Precipitation Probability
+- Rain / Showers / Snowfall
+- Evapotranspiration & Reference ET₀
+- Wind Speed (10 m) & Wind Gusts (10 m)
+- Soil Temperature (0 cm, 6 cm, 18 cm)
+- Soil Moisture (0–1, 1–3, 3–9, 9–27 cm)
+</details>
+
+<details>
+<summary><strong>Daily</strong></summary>
+
+- Sunshine Duration
+- UV Index (max)
+- Precipitation Sum
+</details>
+
+<details>
+<summary><strong>Current</strong></summary>
+
+- Temperature (2 m)
+- Relative Humidity (2 m)
+- Precipitation (last 15 min)
+- Weather Code
+- Cloud Cover (%)
+</details>
+
+---
+
+## 🧩 Módulos funcionales
+
+| Módulo                                           | Variables utilizadas                                                                |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| **Precipitación acumulada & pronóstico**         | Precipitation Sum, Rain, Showers, Snowfall, Precipitation Probability, Weather Code |
+| **Motor de alertas (heladas, sequías, granizo)** | Temperature, Dew Point, Soil Moisture, Evapotranspiration, Weather Code, Wind Gusts |
+| **Temperatura del suelo & humedad relativa**     | Soil Temperature (0, 6, 18 cm), Relative Humidity (2 m)                             |
+
+---
+
+## 🎯 Público objetivo
+
+- **Cooperativas agrícolas** (decisiones colectivas de riego y cosecha).
+- **Empresas de agrotecnología** que integren dashboards en sus plataformas.
+- **Aseguradoras agrarias** para parametrizar pólizas indexadas al clima.
+
+---
+
+## 🛠️ Stack & arquitectura
+
+- **React + Vite + TypeScript** (frontend).
+- **Tailwind CSS + shadcn/ui** para UI responsiva.
+- **Open‑Meteo API** (datos horarios/día).
+- **Alert Engine** basado en reglas puras (ver \`/src/rules/\*\`).
+
+---

@@ -9,7 +9,7 @@ export default function DashboardHeader() {
         </h1>
         <p className="text-lg md:text-left text-white mb-4">
           Optimiza tus decisiones agrícolas con datos meteorológicos precisos.
-          Monitorea precipitaciones, alertas climáticas, y la temperatura del suelo.
+          Monitorea precipitaciones, alertas climáticas, y temperaturas clave.
         </p>
       </section>
       <LocationSelector />
