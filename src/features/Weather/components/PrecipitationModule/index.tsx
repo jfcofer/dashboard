@@ -47,16 +47,44 @@ export default function PrecipitationModule() {
         {/* Izquierda: Condiciones actuales */}
         <div className="flex flex-col gap-3">
           <h3 className="text-lg font-semibold text-gray-800">Condiciones Actuales</h3>
-          {condiciones.map((c) => (
-            <div key={c.label} className="bg-gray-100 rounded-md p-3 flex items-center gap-4">
-              <span className="text-3xl">{c.icon}</span>
-              <div>
-                <p className="text-sm text-gray-600">{c.label}</p>
-                <p className="text-xl font-bold text-blue-800">{c.value}</p>
-              </div>
+
+          {/* Lluvia */}
+          <div className="bg-gray-100 rounded-md p-3 flex items-center gap-4">
+            <span className="text-3xl">🌧️</span>
+            <div>
+              <p className="text-sm text-gray-600">Lluvia</p>
+              <p className="text-xl font-bold text-blue-800">{data.hourly.rain[0]} mm</p>
             </div>
-          ))}
+          </div>
+
+          {/* Chubascos */}
+          <div className="bg-gray-100 rounded-md p-3 flex items-center gap-4">
+            <span className="text-3xl">🌦️</span>
+            <div>
+              <p className="text-sm text-gray-600">Chubascos</p>
+              <p className="text-xl font-bold text-blue-800">{data.hourly.showers[0]} mm</p>
+            </div>
+          </div>
+
+          {/* Nieve */}
+          <div className="bg-gray-100 rounded-md p-3 flex items-center gap-4">
+            <span className="text-3xl">❄️</span>
+            <div>
+              <p className="text-sm text-gray-600">Nieve</p>
+              <p className="text-xl font-bold text-blue-800">{data.hourly.snowfall[0]} mm</p>
+            </div>
+          </div>
+
+          {/* Probabilidad */}
+          <div className="bg-gray-100 rounded-md p-3 flex items-center gap-4">
+            <span className="text-3xl">💧</span>
+            <div>
+              <p className="text-sm text-gray-600">Probabilidad</p>
+              <p className="text-xl font-bold text-blue-800">{data.hourly.precipitation_probability[0]}%</p>
+            </div>
+          </div>
         </div>
+
 
         {/* Derecha: ChartUI con datos reales */}
         <div className="w-full max-w-3xl mx-auto">
