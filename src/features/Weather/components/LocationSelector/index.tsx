@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useWeatherContext } from './../../context/WeatherContext';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { MapPin } from 'lucide-react';
 
 interface Location {
   value: string
@@ -9,7 +11,7 @@ interface Location {
   lon: number
 }
 
-const locationsData: Location[] = [
+const locations: Location[] = [
   { value: 'ec-quito', city: 'Quito', country: 'Ecuador', lat: -0.180653, lon: -78.467834 },
   { value: 'ec-guayaquil', city: 'Guayaquil', country: 'Ecuador', lat: -2.170998, lon: -79.922359 },
 ]
@@ -18,31 +20,41 @@ export default function LocationSelector() {
   const [selectedValue, setSelectedValue] = useState<string>('ec-guayaquil')
 
   useEffect(() => {
-    const loc = locationsData.find((l) => l.value === selectedValue);
+    const loc = locations.find((l) => l.value === selectedValue);
     if (loc) {
       setLocation(loc.lat, loc.lon);
     }
   }, [selectedValue, setLocation]);
 
   return (
-    <div className="flex flex-col gap-2 w-1/3 px-10">
-      <label htmlFor="location" className="text-sm text-center font-medium text-green-900">
+
+    <div className="flex flex-col gap-2 min-w-[280px]  items-center">
+      <label htmlFor="location" className="text-sm font-medium text-green-900">
         Ubicación Geográfica
       </label>
-      <div className="relative">
-        <select
-          id="location"
-          value={selectedValue}
-          onChange={e => setSelectedValue(e.target.value)}
-          className="w-full bg-white border border-r-green-700 rounded-md py-2 px-3 pr-8 text-sm text-green-900  focus:border-green-900"
-        >
-          {locationsData.map(loc => (
-            <option key={loc.value} value={loc.value}>
-              {loc.city}
-            </option>
+      <Select value={selectedValue} onValueChange={setSelectedValue}>
+        <SelectTrigger id="location" className="bg-white pl-2 border-gray-200 w-full py-6">
+          <div className="flex items-center gap-2 w-full justify-center">
+            <MapPin className="h-4 w-4 text-gray-600" />
+            <SelectValue placeholder="Seleccionar ubicación" />
+          </div>
+        </SelectTrigger>
+        <SelectContent className="bg-white shadow-lg w-full">
+          {locations.map((location) => (
+            <SelectItem
+              key={location.value}
+              value={location.value}
+              className="hover:bg-gray-100 focus:bg-gray-100"
+            >
+              <div className="flex flex-col">
+                <span className="font-medium">{location.city}</span>
+                <span className="text-xs text-gray-500">{location.country}</span>
+              </div>
+            </SelectItem>
           ))}
-        </select>
-      </div>
+        </SelectContent>
+      </Select>
     </div>
+
   );
 }
