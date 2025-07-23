@@ -2,18 +2,17 @@ import LocationSelector from "../LocationSelector";
 
 export default function DashboardHeader() {
   return (
-      <header className="py-5 px-7  flex flex-col gap-1.5 md:flex-row md:gap-2 justify-center items-center">
-        <section className="flex flex-col gap-3">
-          <h1 className="text-4xl text-center md:text-left font-bold text-green-900">
-            Dashboard Agroclimático
-          </h1>
-          <p className="text-lg text-center md:text-left text-yellow-700 mb-4 max-w-2xl">
-            Optimiza tus decisiones agrícolas con datos meteorológicos precisos.
-            Monitorea precipitaciones, alertas climáticas, temperatura del suelo y
-            encuentra las ventanas óptimas para siembra, riego, fumigación y cosecha.
-          </p>
-        </section>
-        <LocationSelector />
-      </header >
+    <header className="py-5 px-10 w-fit flex flex-col gap-1.5 md:flex-row  items-center">
+      <section className="flex flex-col gap-4">
+        <h1 className="flex items-center gap-2 text-4xl font-bold text-green-900">
+          <span>Dashboard Agroclimático</span>
+        </h1>
+        <p className="text-lg md:text-left text-yellow-700 mb-4">
+          Optimiza tus decisiones agrícolas con datos meteorológicos precisos.
+          Monitorea precipitaciones, alertas climáticas, y la temperatura del suelo.
+        </p>
+      </section>
+      <LocationSelector/>
+    </header >
   );
 }
