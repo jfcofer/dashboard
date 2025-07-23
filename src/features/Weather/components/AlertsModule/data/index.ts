@@ -1,40 +1,26 @@
-import type { OpenMeteoResponse } from "../../../../../services/openMeteo/openMeteo.types";
-import type { Alert } from "../../../types";
+import { frostRule } from "./rules/frostRule";
+import { heatRule } from "./rules/heatRule";
+import { droughtRule } from "./rules/droughtRule";
+import { floodRule } from "./rules/floodRule";
+import { windRule } from "./rules/windRule";
+import { uvRule } from "./rules/uvRule";
+import { waterlogRule } from "./rules/waterlogRule";
+import type { OpenMeteoResponse } from "@/services/openMeteo/openMeteo.types";
+import type { Alert } from "./types/types";
 
-function generateAlerts(data: OpenMeteoResponse): Alert[] {
-  if (!data) {
-    return [
-      {
-        id: "a1",
-        severity: "High",
-        event: "Plaga de langostas",
-        description:
-          "Se ha detectado una invasión de langostas en la zona norte del cultivo de maíz. Se recomienda aplicar control biológico inmediato.",
-      },
-    ];
-  }
-  return [
-    {
-      id: "a1",
-      severity: "High",
-      event: "Plaga de langostas",
-      description:
-        "Se ha detectado una invasión de langostas en la zona norte del cultivo de maíz. Se recomienda aplicar control biológico inmediato.",
-    },
-    {
-      id: "a2",
-      severity: "Moderate",
-      event: "Sequía prolongada",
-      description:
-        "La región ha registrado 15 días sin lluvias. Se sugiere implementar sistemas de riego por goteo para evitar el estrés hídrico en las plantas.",
-    },
-    {
-      id: "a3",
-      severity: "Low",
-      event: "Recomendación de fertilización",
-      description:
-        "Es el momento óptimo para aplicar fertilizantes nitrogenados en los cultivos de arroz.",
-    },
-  ];
+const RULES = [
+  frostRule,
+  heatRule,
+  droughtRule,
+  floodRule,
+  windRule,
+  uvRule,
+  waterlogRule,
+];
+
+export function generateAlerts(data: OpenMeteoResponse): Alert[] {
+  let id = 1;
+  return RULES.map((r) => r.evaluate(data))
+    .filter((a): a is Alert => a !== null)
+    .map((a) => ({ ...a, id: id++ }));
 }
-export { generateAlerts };

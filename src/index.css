@@ -118,3 +118,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .metric-card {
+    @apply  p-6 hover:scale-105 transform transition-all duration-200;
+  }
+}

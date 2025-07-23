@@ -1,6 +1,4 @@
-import { AlertsModule, DashboardHeader, PrecipitationModule, WeatherProvider } from './features/Weather';
-import TemperatureWindModule from './TemperatureWindModule';
-import MetricsModule from './features/Weather/components/MetricsModule';
+import { AlertsModule, DashboardFooter, DashboardHeader, MetricsModule, PrecipitationModule, TemperatureWindModule, WeatherProvider } from './features/Weather';
 
 function App() {
   return (
@@ -12,6 +10,7 @@ function App() {
         <TemperatureWindModule />
         <AlertsModule />
       </main>
+      <DashboardFooter />
     </WeatherProvider >
   );
 }

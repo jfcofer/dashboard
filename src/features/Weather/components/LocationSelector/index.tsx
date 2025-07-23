@@ -28,7 +28,7 @@ export default function LocationSelector() {
 
   return (
 
-    <div className="flex flex-col gap-2 min-w-[280px]  items-center">
+    <div className="flex flex-col gap-2 min-w-[280px] rounded-sm items-center">
       <label htmlFor="location" className="text-sm font-medium text-green-900">
         Ubicación Geográfica
       </label>
