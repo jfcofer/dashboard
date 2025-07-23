@@ -55,7 +55,7 @@ export default function MetricsModule() {
           </div>
           <div>
             <p className="text-sm text-yellow-600 font-medium">UV Index</p>
-            <p className="text-2xl font-bold text-yellow-800">7</p>
+            <p className="text-2xl font-bold text-yellow-800">{data.daily.uv_index_max.at(-1)}</p>
           </div>
         </div>
       </Card>

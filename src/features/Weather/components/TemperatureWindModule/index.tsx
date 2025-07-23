@@ -1,4 +1,4 @@
-import { useWeatherContext } from '../features/Weather/context/WeatherContext';
+import { useWeatherContext } from '../../context/WeatherContext';
 import ChartTempWind from './ChartTempWind';
 import TableTempWind from './TableTempWind';
 import { Thermometer } from 'lucide-react'; // Cambiado por uno más apropiado
