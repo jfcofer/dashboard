@@ -10,13 +10,6 @@ export default function PrecipitationModule() {
   if (error) return <div className="text-center text-red-600">Error al cargar los datos.</div>;
   if (!data) return <div className="text-center">Sin datos disponibles.</div>;
 
-  // Condiciones actuales (hora 0)
-  const condiciones = [
-    { label: 'Lluvia', value: `${data.hourly.rain[0]} mm`, icon: '🌧️' },
-    { label: 'Chubascos', value: `${data.hourly.showers[0]} mm`, icon: '🌦️' },
-    { label: 'Nieve', value: `${data.hourly.snowfall[0]} mm`, icon: '❄️' },
-    { label: 'Probabilidad', value: `${data.hourly.precipitation_probability[0]}%`, icon: '💧' },
-  ];
 
   // Promedio diario de probabilidad
   const dailyProbability: number[] = [];
