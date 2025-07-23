@@ -1,15 +1,6 @@
 import { useWeatherContext } from '../../context/WeatherContext';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-  CartesianGrid,
-} from 'recharts';
 import { Droplets } from 'lucide-react';
+import ChartUI from './ChartUI';
 
 export default function PrecipitationModule() {
   const { data, isLoading, error, latitude } = useWeatherContext();
@@ -19,7 +10,7 @@ export default function PrecipitationModule() {
   if (error) return <div className="text-center text-red-600">Error al cargar los datos.</div>;
   if (!data) return <div className="text-center">Sin datos disponibles.</div>;
 
-  // 👉 Condiciones actuales (basado en la hora actual)
+  // Condiciones actuales (hora 0)
   const condiciones = [
     { label: 'Lluvia', value: `${data.hourly.rain[0]} mm`, icon: '🌧️' },
     { label: 'Chubascos', value: `${data.hourly.showers[0]} mm`, icon: '🌦️' },
@@ -27,7 +18,7 @@ export default function PrecipitationModule() {
     { label: 'Probabilidad', value: `${data.hourly.precipitation_probability[0]}%`, icon: '💧' },
   ];
 
-  // 👉 Calcular promedio diario de probabilidad
+  // Promedio diario de probabilidad
   const dailyProbability: number[] = [];
   const perDay = 24;
 
@@ -37,7 +28,7 @@ export default function PrecipitationModule() {
     dailyProbability.push(avg);
   }
 
-  // 👉 Preparar datos para el gráfico
+  // Datos combinados diarios
   const dailyData = data.daily.time.map((date, i) => ({
     day: new Date(date).toLocaleDateString('es-EC', { weekday: 'short' }),
     acumulada: data.daily.precipitation_sum[i],
@@ -46,13 +37,12 @@ export default function PrecipitationModule() {
 
   return (
     <section className="bg-white p-6 rounded-xl shadow-md space-y-6">
-      {/* ✅ Encabezado */}
+      {/* Título principal */}
       <div className="bg-blue-100 border-l-4 border-blue-500 p-4 rounded-md flex items-center gap-3">
         <Droplets className="text-blue-600" size={24} />
         <h2 className="text-xl font-bold text-blue-900">Precipitación Acumulada y Pronóstico</h2>
       </div>
 
-      {/* 🟨 Cuerpo dividido en dos columnas */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Izquierda: Condiciones actuales */}
         <div className="flex flex-col gap-3">
@@ -68,30 +58,13 @@ export default function PrecipitationModule() {
           ))}
         </div>
 
-        {/* Derecha: Gráfico */}
-        <div className="bg-gray-50 p-4 rounded-md">
-          <ResponsiveContainer width="100%" height={260}>
-            <LineChart data={dailyData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="day" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="acumulada"
-                stroke="#007bff"
-                name="Acumulada (mm)"
-              />
-              <Line
-                type="monotone"
-                dataKey="probabilidad"
-                stroke="#9932CC"
-                strokeDasharray="4 4"
-                name="Probabilidad (%)"
-              />
-            </LineChart>
-          </ResponsiveContainer>
+        {/* Derecha: ChartUI con datos reales */}
+        <div className="w-full max-w-3xl mx-auto">
+          <ChartUI
+            labels={dailyData.map((d) => d.day)}
+            acumulada={dailyData.map((d) => d.acumulada)}
+            probabilidad={dailyData.map((d) => d.probabilidad)}
+          />
         </div>
       </div>
     </section>
