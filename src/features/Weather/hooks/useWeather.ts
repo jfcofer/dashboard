@@ -41,7 +41,13 @@ const DEFAULT_HOURLY = [
   "soil_moisture_9_to_27cm",
 ] as const;
 
-const DEFAULT_CURRENT = ["weather_code", "cloud_cover"] as const;
+const DEFAULT_CURRENT = [
+  "temperature_2m",
+  "relative_humidity_2m",
+  "precipitation",
+  "weather_code",
+  "cloud_cover",
+] as const;
 
 export type UseWeatherParams = Omit<
   WeatherQueryParams,

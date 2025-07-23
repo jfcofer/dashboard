@@ -86,6 +86,9 @@ export interface Hourlyunits {
 export interface Current {
   time: string;
   interval: number;
+  temperature_2m: number;
+  relative_humidity_2m: number;
+  precipitation: number;
   weather_code: number;
   cloud_cover: number;
 }
